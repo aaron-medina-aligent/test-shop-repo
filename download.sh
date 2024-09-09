@@ -22,13 +22,11 @@ if [ $? -ne 0 ] || [ -z "$FILES" ]; then
     exit 1
 fi
 
-# Download each file in the repository
+# Download each file in the repository while preserving directory structure
 echo "Downloading files from $USER/$REPO..."
 for FILE in $FILES; do
     echo "Downloading $FILE..."
     # Create directories as needed and download the file
-    mkdir -p "$(dirname "$FILE")"
+    mkdir -p "$(dirname "$FILE")"  # Create the directory structure
     curl -s "$BASE_URL/$FILE" -o "$FILE"  # Use -o with the full path to save the file correctly
 done
-
-echo "All files downloaded successfully."
