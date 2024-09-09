@@ -1,11 +1,5 @@
-# prevent .access_token from being committed
-.access_token
 
-# prevent .env.bak from being committed
-.env.bak
-
-
-local_dev_scripts
+local_dev_scripts/*
 local.env
 local.env.bak
 Dockerfile
