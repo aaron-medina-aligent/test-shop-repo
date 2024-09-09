@@ -16,10 +16,10 @@ navigate_to_project() {
   cd "$(dirname "$0")/.." || exit
 }
 
-# Function to load environment variables
+# Function to load environment variables local.env
 load_env() {
   set -o allexport
-  source .env
+  source local.env
   if [ -f .access_token ]; then
     source .access_token
   fi
@@ -30,7 +30,7 @@ load_env() {
 check_variable() {
   local var_name="$1"
   if [ -z "${!var_name}" ]; then
-    echo -e "${RED}ERROR${RESET}: $var_name is not set in the .env file."
+    echo -e "${RED}ERROR${RESET}: $var_name is not set in the local.env file."
     exit 1
   fi
 }
@@ -53,16 +53,16 @@ run_new_container() {
     --name "$1" \
     --volume "$(pwd):/shopify" \
     -w /shopify/theme \
-    --env-file .env \
+    --env-file local.env \
     --user "$(id -u):$(id -g)" \
     $IMAGE_NAME tail -f /dev/null
 }
 
-# Function to check if .env file is initiated
+# Function to check if local.env file is initiated
 check_initiated() {
   load_env  # Load the environment variables
   if [ "$INITIATED" != "true" ]; then
-    echo -e "${RED}ERROR${RESET}: The .env file has not been initiated. Please run the set-up-dev-env.sh script first."
+    echo -e "${RED}ERROR${RESET}: The local.env file has not been initiated. Please run the set-up-dev-env.sh script first."
     exit 1
   fi
 }
