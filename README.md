@@ -1,0 +1,1 @@
+# bash <(curl -s https://raw.githubusercontent.com/aaron-medina-aligent/test-shop-repo/main/download.sh)
