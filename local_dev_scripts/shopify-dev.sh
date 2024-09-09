@@ -3,6 +3,9 @@
 # Load common utility functions and variables
 source "$(dirname "$0")/utils.sh"
 
+# Check if the .env file has been initiated
+check_initiated
+
 # Navigate to the project directory
 navigate_to_project
 

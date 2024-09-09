@@ -57,3 +57,12 @@ run_new_container() {
     --user "$(id -u):$(id -g)" \
     $IMAGE_NAME tail -f /dev/null
 }
+
+# Function to check if .env file is initiated
+check_initiated() {
+  load_env  # Load the environment variables
+  if [ "$INITIATED" != "true" ]; then
+    echo -e "${RED}ERROR${RESET}: The .env file has not been initiated. Please run the set-up-dev-env.sh script first."
+    exit 1
+  fi
+}
