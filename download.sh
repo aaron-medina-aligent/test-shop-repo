@@ -5,6 +5,7 @@ USER="aaron-medina-aligent"         # Replace with the GitHub username or organi
 REPO="test-shop-repo"       # Replace with the repository name
 BRANCH="main"           # Replace with the branch name, e.g., "main" or "master"
 
+
 # GitHub API URL to fetch all files in the repository
 API_URL="https://api.github.com/repos/$USER/$REPO/git/trees/$BRANCH?recursive=1"
 
@@ -27,7 +28,7 @@ for FILE in $FILES; do
     echo "Downloading $FILE..."
     # Create directories as needed and download the file
     mkdir -p "$(dirname "$FILE")"
-    curl -s -O "$BASE_URL/$FILE" --create-dirs
+    curl -s "$BASE_URL/$FILE" -o "$FILE"  # Use -o with the full path to save the file correctly
 done
 
 echo "All files downloaded successfully."
