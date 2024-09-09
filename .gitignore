@@ -1,5 +1,0 @@
-
-local_dev_scripts/*
-local.env
-local.env.bak
-Dockerfile
