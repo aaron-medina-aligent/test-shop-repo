@@ -64,7 +64,6 @@ write_gitignore() {
 
     # Define ignore patterns
     IGNORE_PATTERNS=(
-        "local_dev_scripts/*"
         "local.env"
         "local.env.bak"
         "Dockerfile"
