@@ -21,6 +21,7 @@ shopify-theme-development-tools
 │   ├── shopify-get-theme-info.sh
 │   ├── shopify-run.sh
 │   ├── shopify-stop.sh
+│   ├── shopify-test-connection
 │   ├── shopify-theme-check.sh
 │   ├── shopify-theme-pull.sh
 │   └── utils.sh
@@ -40,6 +41,7 @@ shopify-theme-development-tools
   - **shopify-get-theme-info.sh**: Fetches information about the available themes from the Shopify store.
   - **shopify-run.sh**: Starts the Docker container for the local development environment in detached mode.
   - **shopify-stop.sh**: Stops the running Docker container.
+  - **shopify-test-connection**: Test the credentials. If valid, it will print a list of your themes.
   - **shopify-theme-check.sh**: Runs Shopify Theme Check for code quality and best practices.
   - **shopify-theme-pull.sh**: Downloads the target Shopify theme into the local development environment.
   - **utils.sh**: Contains utility functions used by other scripts.
