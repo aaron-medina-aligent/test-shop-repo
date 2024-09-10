@@ -1,6 +1,15 @@
-Now it's done and time to write a readme file.
+# Aligent Shopify Theme Development Tools
 
-Here's the file structure:
+**Version**: (beta) 1.0  
+**Author**: Aaron Medina (aaron.medina@aligent.com.au)
+
+## Description
+
+This repository contains scripts and tools designed to set up and manage a Shopify theme development environment for clients. It includes various utilities for configuring a local development setup, working with Shopify themes, and integrating with Bitbucket Pipelines for CI/CD processes. These tools streamline the development workflow by providing a Docker-based environment, command-line utilities for interacting with Shopify themes, and scripts to automate repetitive tasks.
+
+## File Structure
+
+```bash
 shopify-theme-development-tools
 ├── bitbucket-pipelines.yml
 ├── Dockerfile
@@ -17,78 +26,55 @@ shopify-theme-development-tools
 │   └── utils.sh
 ├── local.env
 └── README.md
+```
 
-Can you please help me write the README file on how to set up a new shopify client repository.
+## File Descriptions
 
-TARGET STRUCTURE FOR README
-Title: Aligent Shopify Theme Development Tools
-Information:
-- version: (beta) 1.0
-- author: Aaron Medina aaron.medina@aligent.com.au
-File Structure:
-File Description:
-Usage Instructions:
+- **bitbucket-pipelines.yml**: Contains the configuration for Bitbucket Pipelines, used for automating CI/CD processes.
+- **Dockerfile**: Defines the Docker image configuration for the local development environment.
+- **download.sh**: Script to download all necessary files for setting up the Shopify theme development tools.
+- **local_dev_scripts**: Directory containing scripts to assist developers during the implementation process.
+  - **set-up-dev-env.sh**: Initializes the development environment, setting up the `local.env` file with required variables.
+  - **shopify-build.sh**: Builds the Docker image used for local development.
+  - **shopify-dev.sh**: Runs the theme locally in development mode.
+  - **shopify-get-theme-info.sh**: Fetches information about the available themes from the Shopify store.
+  - **shopify-run.sh**: Starts the Docker container for the local development environment in detached mode.
+  - **shopify-stop.sh**: Stops the running Docker container.
+  - **shopify-theme-check.sh**: Runs Shopify Theme Check for code quality and best practices.
+  - **shopify-theme-pull.sh**: Downloads the target Shopify theme into the local development environment.
+  - **utils.sh**: Contains utility functions used by other scripts.
+- **local.env**: Environment variables file for the local development setup. **Note:** This file should not be committed to the repository for security reasons.
+- **README.md**: Documentation file providing setup instructions and descriptions of the repository contents.
 
+## Instructions
 
-----------------
+### Step 1: Create a New Bitbucket Repository
 
-Description for this repository:
-This repo contains script that will assist in setting up the client's shopify theme repository and development environment.
-This also contains scripts that will help the developers during the implementation process.
-<Feel free to add more description based on the content of the repository>
+Create a new Bitbucket repository for the client's Shopify theme.
 
-File Structure:
-shopify-theme-development-tools
-├── bitbucket-pipelines.yml
-├── Dockerfile
-├── download.sh
-├── local_dev_scripts
-│   ├── set-up-dev-env.sh
-│   ├── shopify-build.sh
-│   ├── shopify-dev.sh
-│   ├── shopify-get-theme-info.sh
-│   ├── shopify-run.sh
-│   ├── shopify-stop.sh
-│   ├── shopify-theme-check.sh
-│   ├── shopify-theme-pull.sh
-│   └── utils.sh
-├── local.env
-└── README.md
+### Step 2: Download Necessary Files
 
-File Description:
-bitbucket-pipelines.yml - contains the configuration for the bitbucket pipelines.
-Dockerfile - contains the configuration for the docker image for the local development environment.
-download.sh - script that will download all the necessary files for the shopify theme development tools.
-local_dev_scripts - directory that contains all the scripts that will help the developers during the implementation process.
-set-up-dev-env.sh - script that will set up the development environment for the shopify theme, will initiate the local.env file.
-shopify-build.sh - script that builds the docker image
-shopify-dev.sh -
-shopify-get-theme-info.sh - 
-shopify-run.sh - 
-shopify-stop.sh -
-shopify-theme-check.sh - 
-shopify-theme-pull.sh - 
-utils.sh - 
-local.env - will contain the environment variables for the local development environment. THIS SHOULD NOT BE INCLUDED IN THE REPOSITORY.
+Navigate to the newly created repository and run the following command to download all necessary files:
 
+```bash
+bash <(curl -s https://raw.githubusercontent.com/aaron-medina-aligent/test-shop-repo/main/download.sh)
+```
 
-Usage Instructions:
-1. Create a new bitbucket repository for the client's shopify theme.
-2. Get into the repository and run the following command:
-   ```
-    bash <(curl -s https://raw.githubusercontent.com/aaron-medina-aligent/test-shop-repo/main/download.sh)
-   ```
-   This will download all the necessary files for the shopify theme development tools, will generate a gitignore file that ensures the local.environment will not be included in the repository.
-3. Run the following command to set up the development environment:
-   ```
-   bash ./local_dev_scripts/set-up-dev-env.sh
-   ```
-   This will set up the development environment for the shopify theme and will prompt for the following information
+This will also generate a .gitignore file to ensure that sensitive files like local.env are not included in the repository.
 
-   IMAGE_NAME (current: shopify-docker-image) - Default value. Can leave as is.
-   CONTAINER_NAME (current: shopify-container) - Default value. Can leave as is. 
-   SHOPIFY_STORE (current: mystore.shopify) - Must be a valid shopify store 
-   THEME_ID (current: XXXXXXXX) - Target theme that you would like to work on. You can use the shopify-get-theme-info.sh and update this part later. 
-   FAIL_LEVEL [crash|error|suggestion|style|warning|info] (current: crash) - 
-   SHOPIFY_ACCESS_TOKEN (current: XXXXXXXXXXXX) - Generated from Theme Access app from Shopify
-4. 
+### Step 3: Set Up the Development Environment
+
+Run the following command to initialize the development environment:
+
+```bash
+bash ./local_dev_scripts/set-up-dev-env.sh
+```
+
+You will be prompted to provide the following information:
+
+- IMAGE_NAME (default: shopify-docker-image)
+- CONTAINER_NAME (default: shopify-container)
+- SHOPIFY_STORE (e.g., mystore.shopify)
+- THEME_ID (Use shopify-get-theme-info.sh to retrieve the theme ID if unknown initially)
+- FAIL_LEVEL (e.g., crash, error, suggestion, etc.)
+- SHOPIFY_ACCESS_TOKEN (Generated from the Theme Access app in Shopify)

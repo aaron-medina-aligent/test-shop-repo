@@ -50,6 +50,6 @@ if [ $EXIT_CODE -ne 0 ]; then
   # Add any additional error handling or exit the script if needed
   exit $EXIT_CODE
 else
-  echo -e "The theme check ${GREEN}PASSED${RESET}, ready for deployment!"
+  echo -e "The theme check ${GREEN}PASSED${RESET} for fail level = $FAIL_LEVEL. This theme is ready for deployment!"
 
 fi

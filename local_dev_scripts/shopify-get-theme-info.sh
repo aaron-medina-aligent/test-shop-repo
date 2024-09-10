@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load common utility functions and variables
-source "$(dirname "$0")/shopify-utils.sh"
+source "$(dirname "$0")/utils.sh"
 
 # Check if the local.env file has been initiated
 check_initiated
