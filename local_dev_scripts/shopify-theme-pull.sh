@@ -47,8 +47,8 @@ read -r user_input
 if [ "$user_input" == "YES" ]; then
     # Proceed with the deletion and pull action
     rm -rf theme/*
-    echo -e "\nPulling the production theme from Shopify...\n\n"
-    docker exec -it "$CONTAINER_NAME" shopify theme pull --store="$SHOPIFY_STORE" --password="$SHOPIFY_ACCESS_TOKEN" --theme="$THEME_PRODUCTION_ID" 
+    echo -e "\nPulling the theme ($THEME_ID) from Shopify...\n\n"
+    docker exec -it "$CONTAINER_NAME" shopify theme pull --store="$SHOPIFY_STORE" --password="$SHOPIFY_ACCESS_TOKEN" --theme="$THEME_ID" 
 else
     # Cancel the action
     echo -e "Action cancelled.\nAborted shopify theme pull.\n The 'theme' folder was not overwritten."

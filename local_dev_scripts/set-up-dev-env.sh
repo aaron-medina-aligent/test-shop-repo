@@ -89,6 +89,11 @@ write_gitignore() {
     echo -e ".gitignore has been updated.\n"
 }
 
+create_theme_folder() {
+    mkdir -p theme
+    echo -e "\nCreated 'theme' folder.\n"
+}
+
 # Main script loop to allow verification and retry
 while true; do
     # Prompt user to enter or update values
@@ -111,3 +116,6 @@ done
 
 # Write to the .gitignore file
 write_gitignore
+
+#Create the theme folder
+create_theme_folder

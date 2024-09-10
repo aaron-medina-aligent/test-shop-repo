@@ -18,7 +18,7 @@ check_variable "CONTAINER_NAME"
 
 # Check if the container is already running
 if is_container_running "$CONTAINER_NAME"; then
-  echo "Container '${YELLOW}$CONTAINER_NAME${RESET}' is already running."
+  echo -e "Container '${YELLOW}$CONTAINER_NAME${RESET}' is already running."
 else
   # Check if the container exists but is stopped
   if docker ps -aq -f name="$CONTAINER_NAME" | grep -q .; then
@@ -45,11 +45,11 @@ EXIT_CODE=$?
 
 # Optionally, handle the exit code
 if [ $EXIT_CODE -ne 0 ]; then
-  echo -e "The theme check FAILED to pass the fail level = $FAIL_LEVEL"
+  echo -e "The theme check ${RED}FAILED${RESET} to pass the fail level = $FAIL_LEVEL"
   echo -e "Exit code: $EXIT_CODE"
   # Add any additional error handling or exit the script if needed
   exit $EXIT_CODE
 else
-  echo -e "The theme check PASSED, ready for deployment!"
+  echo -e "The theme check ${GREEN}PASSED${RESET}, ready for deployment!"
 
 fi

@@ -10,7 +10,7 @@ RUN groupadd -g $GROUP_ID shopifygroup && \
     useradd -u $USER_ID -g shopifygroup -m shopifyuser
 
 # Create the /theme directory and set the correct permissions
-RUN mkdir -p /theme && chown shopifyuser:shopifygroup /theme
+RUN mkdir -p /shopify && chown shopifyuser:shopifygroup /shopify
 
 # Install xdg-utils for opening URLs
 RUN apt-get update && apt-get install -y xdg-utils
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y xdg-utils
 RUN chown -R shopifyuser:shopifygroup /usr/local/lib/node_modules/@shopify/cli/dist/assets/cli-ruby
 
 # Set the working directory
-WORKDIR /theme
+WORKDIR /shopify
 
 # Switch to the non-root user for security
 USER shopifyuser
