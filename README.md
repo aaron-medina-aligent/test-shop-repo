@@ -78,3 +78,26 @@ You will be prompted to provide the following information:
 - THEME_ID (Use shopify-get-theme-info.sh to retrieve the theme ID if unknown initially)
 - FAIL_LEVEL (e.g., crash, error, suggestion, etc.)
 - SHOPIFY_ACCESS_TOKEN (Generated from the Theme Access app in Shopify)
+
+### Step 4: Test Shopify Connection
+
+To ensure the configuration is correct, test your connection with Shopify:
+
+```bash
+bash ./local_dev_scripts/shopify-test-connection.sh
+```
+
+### Step 5: Build the Docker Image
+
+Build the Docker image for your local development environment:
+```bash
+bash ./local_dev_scripts/shopify-build.sh
+```
+
+### Step 6: Run the Docker Container
+
+Start the Docker container in detached mode. This step should be performed every time you want to run your local development environment:
+
+```bash
+bash ./local_dev_scripts/shopify-run.sh
+```
