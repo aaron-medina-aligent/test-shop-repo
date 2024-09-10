@@ -3,27 +3,39 @@
 # Load common utility functions and variables
 source "$(dirname "$0")/utils.sh"
 
+# Check if the local.env file has been initiated
+check_initiated
+
+# Navigate to the project directory
+navigate_to_project
+
 # Load environment variables
 load_env
 
+# Check if SHOPIFY_STORE and CONTAINER_NAME variables are set
+check_variable "SHOPIFY_STORE"
+check_variable "CONTAINER_NAME"
 
-# Check if required variables are set
-if [ -z "$SHOPIFY_STORE" ] || [ -z "$SHOPIFY_ACCESS_TOKEN" ]; then
-    echo "Error: SHOPIFY_STORE or SHOPIFY_ACCESS_TOKEN is not set in the .env file."
-    exit 1
-fi
-
-# Test connection to Shopify using the access token
-response=$(curl -s -o /dev/null -w "%{http_code}" -X GET "https://${SHOPIFY_STORE}/admin/api/2023-07/shop.json" \
-    -H "X-Shopify-Access-Token: $SHOPIFY_ACCESS_TOKEN")
-
-# Check the HTTP status code
-if [ "$response" -eq 200 ]; then
-    echo "Connection to Shopify store '${SHOPIFY_STORE}' is successful. Access token is valid."
-elif [ "$response" -eq 401 ]; then
-    echo "Error: Unauthorized. The access token is invalid or has insufficient permissions."
-elif [ "$response" -eq 403 ]; then
-    echo "Error: Forbidden. The access token is valid but does not have the necessary permissions."
+# Check if the container is already running
+if is_container_running "$CONTAINER_NAME"; then
+  echo -e "Container '${YELLOW}$CONTAINER_NAME${RESET}' is already running."
 else
-    echo "Error: Failed to connect to Shopify store. HTTP status code: $response."
+  # Check if the container exists but is stopped
+  if docker ps -aq -f name="$CONTAINER_NAME" | grep -q .; then
+    start_existing_container "$CONTAINER_NAME"
+  else
+    run_new_container "$CONTAINER_NAME"
+
+    # Check if the container started successfully
+    if [ $? -eq 0 ]; then
+      echo -e "Container '${YELLOW}$CONTAINER_NAME${RESET}' is running in detached mode."
+    else
+      echo -e "Failed to start the container."
+      exit 1
+    fi
+  fi
 fi
+
+
+docker exec -it "$CONTAINER_NAME" shopify theme list --store="$SHOPIFY_STORE" --password="$SHOPIFY_ACCESS_TOKEN"  
+
