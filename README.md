@@ -133,7 +133,7 @@ bash ./local_dev_scripts/shopify-theme-check.sh
 Go to your Bitbucket repository settings and add the following repository variables:
 
 - SHOPIFY_STORE
-- SHOPIFY_CLI_ACCESS_TOKEN
+- SHOPIFY_ACCESS_TOKEN
 - FAIL_LEVEL
 - DOCKER_HUB_USERNAME
 - DOCKER_HUB_PASSWORD
