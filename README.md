@@ -101,3 +101,57 @@ Start the Docker container in detached mode. This step should be performed every
 ```bash
 bash ./local_dev_scripts/shopify-run.sh
 ```
+
+### Step 7: Pull the Shopify Theme
+
+Download the Shopify theme that you will be working on:
+
+```bash
+bash ./local_dev_scripts/shopify-theme-pull.sh
+```
+
+The theme files will be downloaded into the theme folder.
+
+### Step 8: Run the Theme locally
+
+To start the local development server for the theme:
+
+```bash
+bash ./local_dev_scripts/shopify-dev.sh
+```
+
+### Step 9: Check Theme Quality
+
+To perform a theme check for code quality and adherence to Shopify best practices, use the following command:
+
+```bash
+bash ./local_dev_scripts/shopify-theme-check.sh
+```
+
+### Step 10: Configure Repository Variables
+
+Go to your Bitbucket repository settings and add the following repository variables:
+
+- SHOPIFY_STORE
+- SHOPIFY_CLI_ACCESS_TOKEN
+- FAIL_LEVEL
+- DOCKER_HUB_USERNAME
+- DOCKER_HUB_PASSWORD
+
+Ensure the "Secured" option is ticked for sensitive information.
+The Docker hub credentials are temporary, will be removed once the docker image is moved to a public repo.
+
+### Step 11: Configure Deployment Variables
+
+Configure the following deployment variables under Bitbucket repository settings for each environment:
+Staging:
+- THEME_ID
+- FAIL_LEVEL
+
+Production:
+
+- THEME_ID
+- FAIL_LEVEL
+
+These configurations are essential for deploying themes to different environments.
+
